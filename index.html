@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UNEXCast — Podcast universitário</title>
+  <meta name="description" content="UNEXCast: projeto acadêmico de podcast universitário da UNEX.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Ícones SVG reutilizáveis -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-mic" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M12 2a3.5 3.5 0 0 0-3.5 3.5v6a3.5 3.5 0 0 0 7 0v-6A3.5 3.5 0 0 0 12 2ZM5 11a7 7 0 0 0 14 0M12 18v4M8 22h8"/></symbol>
+  <symbol id="i-insta" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4Zm5 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm5.5-1.5h.01"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Zm2.5 7v7.5H9V10H6.5Zm1.2-3.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8ZM11 10v7.5h2.5v-4c0-1 .5-1.8 1.5-1.8s1.4.7 1.4 1.8v4H19v-4.5c0-2.2-1.2-3.2-2.8-3.2-1.1 0-1.8.5-2.2 1.1V10H11Z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-6-6 6 6 6-6"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7Z"/></symbol>
+</svg>
+
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="topo">
+  <a class="logo" href="#inicio" aria-label="UNEXCast — início">
+    <svg class="logo-icone" aria-hidden="true"><use href="#i-mic"/></svg>
+    <span>UNEX<b>Cast</b></span>
+  </a>
+  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">
+    <span></span><span></span><span></span>
+  </button>
+  <nav id="menu" class="menu" aria-label="Principal">
+    <a href="#inicio" class="ativo">Início</a>
+    <a href="#episodio">Episódio</a>
+    <a href="#sobre">Sobre</a>
+    <a href="#participantes">Participantes</a>
+  </nav>
+</header>
+
+<main id="conteudo">
+
+  <!-- HERO -->
+  <section class="hero" id="inicio" aria-labelledby="hero-titulo">
+    <div class="hero-img">
+      <img src="imagens/hero-estudio.jpg" alt="Microfone profissional com braço articulado em um estúdio de podcast, ao lado de uma caneca UNEXCast" data-oculta-se-falhar>
+    </div>
+    <div class="hero-texto">
+      <p class="rotulo">Podcast universitário</p>
+      <h1 id="hero-titulo" class="marca">UNEX<b>Cast</b></h1>
+      <p class="destaque">Ideias que conectam pessoas, conhecimento que transforma.</p>
+      <p>O UNEXCast é um projeto acadêmico que reúne conversas, reflexões e diferentes perspectivas sobre o mundo atual. Aqui você encontra um episódio completo, com participantes, debate e muito mais.</p>
+      <div class="botoes">
+        <a class="btn btn-verde" href="#episodio"><svg aria-hidden="true"><use href="#i-play"/></svg> Assistir ao episódio</a>
+        <a class="btn btn-borda" href="#sobre">Conheça o projeto</a>
+      </div>
+      <a class="rolar" href="#episodio"><span class="rolar-seta"><svg aria-hidden="true"><use href="#i-arrow"/></svg></span> Role para descobrir</a>
+    </div>
+  </section>
+
+  <!-- EPISÓDIO -->
+  <section class="secao cartao" id="episodio" aria-labelledby="ep-titulo">
+    <div class="ep-grade">
+      <div class="ep-info">
+        <p class="rotulo rotulo-cian">Episódio</p>
+        <h2 id="ep-titulo">Título do episódio</h2>
+        <p>Aqui vai a descrição do episódio. Um breve resumo sobre o que foi abordado na conversa, como os temas principais e o que você vai encontrar neste conteúdo.</p>
+
+        <div class="ep-midia">
+          <div class="capa"><img src="imagens/capa-episodio.jpg" alt="Capa do episódio do UNEXCast" data-oculta-se-falhar></div>
+          <div class="audio-bloco">
+            <label for="audio" class="so-leitor">Player de áudio do episódio</label>
+            <audio id="audio" controls preload="metadata" src="midia/episodio.mp3"></audio>
+            <p class="aviso" id="avisoAudio" hidden>Arquivo de áudio não encontrado. Coloque o arquivo em <code>midia/episodio.mp3</code>.</p>
+          </div>
+        </div>
+
+        <div class="abas" role="tablist" aria-label="Transcrição e legendas">
+          <button role="tab" id="tab-transc" aria-selected="true" aria-controls="painel-transc">Transcrição</button>
+          <button role="tab" id="tab-leg" aria-selected="false" aria-controls="painel-leg" tabindex="-1">Legendas</button>
+        </div>
+        <div class="painel" role="tabpanel" id="painel-transc" aria-labelledby="tab-transc">
+          <ol class="transcricao" id="transcricao"></ol>
+        </div>
+        <div class="painel" role="tabpanel" id="painel-leg" aria-labelledby="tab-leg" hidden>
+          <p>As legendas ficam no arquivo <code>midia/legendas-pt.vtt</code> e aparecem sobre o vídeo.</p>
+          <button class="btn btn-borda" id="btnLegendas" aria-pressed="false">Ativar legendas no vídeo</button>
+        </div>
+      </div>
+
+      <div class="ep-video">
+        <div class="video-caixa">
+          <video id="video" preload="metadata" poster="imagens/miniatura-video.jpg" aria-label="Vídeo do episódio">
+            <source src="midia/episodio.mp4" type="video/mp4">
+            <track id="trilha" kind="captions" src="midia/legendas-pt.vtt" srclang="pt-BR" label="Português">
+          </video>
+          <button class="video-play" id="videoPlay" aria-label="Reproduzir vídeo"><svg aria-hidden="true"><use href="#i-play"/></svg></button>
+        </div>
+        <p class="aviso" id="avisoVideo" hidden>Arquivo de vídeo não encontrado. Coloque o arquivo em <code>midia/episodio.mp4</code>.</p>
+        <button class="btn btn-borda btn-peq" id="btnCompleta" aria-expanded="false" aria-controls="transcricao">Ver transcrição completa</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE + PARTICIPANTES -->
+  <div class="duas-colunas">
+    <section class="secao cartao sobre" id="sobre" aria-labelledby="sobre-titulo">
+      <div class="sobre-img"><img src="imagens/sobre-estudio.jpg" alt="Estúdio de podcast com microfone, fones e plantas" data-oculta-se-falhar></div>
+      <div>
+        <p class="rotulo rotulo-cian">Sobre o UNEXCast</p>
+        <h2 id="sobre-titulo">Mais que um podcast, um espaço de ideias.</h2>
+        <p>O UNEXCast é um projeto acadêmico que nasce da vontade de ouvir, aprender e compartilhar. Nosso objetivo é reunir pessoas com diferentes perspectivas para conversar sobre temas atuais e relevantes, abordando assuntos que vão além da sala de aula.</p>
+        <div id="sobreMais" hidden>
+          <p>O projeto promove reflexão, aprendizagem e troca de conhecimentos em formato de conversa. <em>(Texto provisório — substitua pela descrição oficial do projeto.)</em></p>
+        </div>
+        <button class="btn btn-borda btn-peq" id="btnSobre" aria-expanded="false" aria-controls="sobreMais">Saiba mais sobre o projeto</button>
+      </div>
+    </section>
+
+    <section class="secao cartao" id="participantes" aria-labelledby="part-titulo">
+      <h2 id="part-titulo" class="rotulo rotulo-cian titulo-rotulo">Participantes</h2>
+      <p>Conheça as pessoas que participaram deste episódio.</p>
+      <ul class="grade-part" id="listaParticipantes"></ul>
+    </section>
+  </div>
+
+  <!-- DESENVOLVEDORES -->
+  <section class="secao cartao" id="desenvolvedores" aria-labelledby="dev-titulo">
+    <h2 id="dev-titulo" class="rotulo rotulo-cian titulo-rotulo">Desenvolvedores</h2>
+    <p>Conheça a equipe responsável por desenvolver este site.</p>
+    <ul class="grade-dev" id="listaDevs"></ul>
+  </section>
+</main>
+
+<footer class="rodape">
+  <a class="logo" href="#inicio" aria-label="UNEXCast — voltar ao início">
+    <svg class="logo-icone" aria-hidden="true"><use href="#i-mic"/></svg><span>UNEX<b>Cast</b></span>
+  </a>
+  <nav aria-label="Rodapé">
+    <a href="#inicio">Início</a><a href="#episodio">Episódio</a><a href="#sobre">Sobre</a><a href="#participantes">Participantes</a>
+  </nav>
+  <p>© <span id="ano">2026</span> UNEXCast. Todos os direitos reservados.</p>
+  <p>Desenvolvido por: Equipe UNEXCast</p>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
