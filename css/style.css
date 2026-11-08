@@ -64,7 +64,7 @@ h2{font-size:clamp(1.4rem,3vw,1.9rem);line-height:1.2;margin-bottom:10px}
 .duas-colunas>.secao{margin:0}
 
 /* Episódio */
-.ep-grade{display:grid;grid-template-columns:1.25fr 1fr;gap:28px}
+.ep-grade{display:grid;grid-template-columns:1.25fr 1fr;gap:28px;align-items:stretch}
 .ep-midia{display:flex;gap:16px;align-items:center;margin:20px 0}
 .capa{width:120px;height:150px;flex:none;border-radius:10px;border:1px solid var(--cian);overflow:hidden;background:linear-gradient(160deg,#0f2d5e,#050d1f)}
 .capa img,.sobre-img img,.foto img,.dev-foto img{width:100%;height:100%;object-fit:cover}
@@ -82,7 +82,15 @@ audio{width:100%;color-scheme:dark}
 .transcricao button:hover{color:var(--texto)}
 .transcricao time{color:var(--cian);font-variant-numeric:tabular-nums;flex:none}
 .transcricao li.atual button{color:var(--verde)}
-.video-caixa{position:relative;border-radius:var(--raio);overflow:hidden;border:1px solid var(--borda);aspect-ratio:16/10;background:linear-gradient(160deg,#0f2d5e,#050d1f)}
+.video-caixa {
+    position: relative;
+    border-radius: var(--raio);
+    overflow: hidden;
+    border: 1px solid var(--borda);
+    aspect-ratio: 16/9;
+    flex: 1;
+    background: linear-gradient(160deg,#0f2d5e,#050d1f);
+}
 .video-caixa video{width:100%;height:100%;object-fit:cover}
 .video-play{position:absolute;inset:0;margin:auto;width:68px;height:68px;border-radius:50%;border:0;background:rgba(14,80,190,.9);display:grid;place-items:center;transition:transform .2s}
 .video-play:hover{transform:scale(1.08)}
@@ -146,7 +154,7 @@ ul{list-style:none;padding:0}
   .hero-img img{-webkit-mask-image:linear-gradient(180deg,#000 50%,transparent);mask-image:linear-gradient(180deg,#000 50%,transparent)}
   .hero-texto{margin-top:-60px;padding-top:0}
   .btn-verde,.btn-borda{width:fit-content}
-  .ep-midia{flex-direction:column;align-items:stretch}
+
   .capa{width:100%;height:auto;aspect-ratio:16/10}
   .sobre{grid-template-columns:1fr}
   .sobre-img{aspect-ratio:16/10;border-radius:14px}
@@ -161,3 +169,120 @@ ul{list-style:none;padding:0}
   html{scroll-behavior:auto}
   *{transition:none!important;animation:none!important}
 }
+/* Informações adicionais dos participantes */
+
+.part-detalhes {
+  margin-top: 12px;
+  border-top: 1px solid var(--borda);
+  padding-top: 10px;
+}
+
+.part-detalhes summary {
+  cursor: pointer;
+  color: var(--cian);
+  font-size: 0.85rem;
+  font-weight: 600;
+  list-style: none;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.part-detalhes summary::-webkit-details-marker {
+  display: none;
+}
+
+.part-detalhes summary::after {
+  content: "⌄";
+  font-size: 1.2rem;
+  transition: transform 0.3s;
+}
+
+.part-detalhes[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.part-detalhes p {
+  color: var(--muda);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+.video-caixa iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: none;
+}
+.lista-momentos {
+    list-style: none;
+    margin: 0;
+    padding: 0 16px;
+    position: absolute;
+    inset: 0;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--cian) transparent;
+}
+
+.momento-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--borda);
+    color: var(--texto);
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.momento-item:hover {
+    background: rgba(56, 189, 248, 0.08);
+}
+
+.momento-tempo {
+    color: var(--cian);
+    font-weight: 600;
+    min-width: 58px;
+    font-variant-numeric: tabular-nums;
+}
+
+.momento-titulo {
+    flex: 1;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.momento-item svg {
+    width: 18px;
+    height: 18px;
+    color: var(--cian);
+    flex-shrink: 0;
+}
+/* Subtítulo do episódio */
+
+#ep-titulo {
+    margin-bottom: 2px;
+}
+
+#ep-titulo + p {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #d6e6ff;
+    line-height: 1.3;
+}
+
+/* Momentos do episódio: altura acompanha o vídeo, com rolagem */
+.ep-info, .ep-video { display: flex; flex-direction: column; min-width: 0; }
+.abas { margin-top: 20px; }
+.momentos-painel { flex: 1; min-height: 140px; position: relative; overflow: hidden; padding: 0; }
+@media (max-width: 1000px) { .momentos-painel { min-height: 320px; } }

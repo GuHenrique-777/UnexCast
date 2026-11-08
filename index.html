@@ -32,16 +32,17 @@
     <span></span><span></span><span></span>
   </button>
   <nav id="menu" class="menu" aria-label="Principal">
-    <a href="#inicio" class="ativo">Início</a>
-    <a href="#episodio">Episódio</a>
-    <a href="#sobre">Sobre</a>
-    <a href="#participantes">Participantes</a>
-  </nav>
+  <a href="#inicio" class="ativo">Início</a>
+  <a href="#episodio">Episódio</a>
+  <a href="#sobre">Sobre</a>
+  <a href="#participantes">Participantes</a>
+  <a href="#desenvolvedores">Desenvolvedores</a>
+</nav>
 </header>
 
 <main id="conteudo">
 
-  <!-- HERO -->
+  <!-- HERO  assistir ao episódio -->
   <section class="hero" id="inicio" aria-labelledby="hero-titulo">
     <div class="hero-img">
       <img src="imagens/hero-estudio.jpg" alt="Microfone profissional com braço articulado em um estúdio de podcast, ao lado de uma caneca UNEXCast" data-oculta-se-falhar>
@@ -50,7 +51,7 @@
       <p class="rotulo">Podcast universitário</p>
       <h1 id="hero-titulo" class="marca">UNEX<b>Cast</b></h1>
       <p class="destaque">Ideias que conectam pessoas, conhecimento que transforma.</p>
-      <p>O UNEXCast é um projeto acadêmico que reúne conversas, reflexões e diferentes perspectivas sobre o mundo atual. Aqui você encontra um episódio completo, com participantes, debate e muito mais.</p>
+      <p>O UNEXCast é um projeto acadêmico que reúne conversas e reflexões sobre o mundo atual, com episódios, participantes e debates enriquecedores.</p>
       <div class="botoes">
         <a class="btn btn-verde" href="#episodio"><svg aria-hidden="true"><use href="#i-play"/></svg> Assistir ao episódio</a>
         <a class="btn btn-borda" href="#sobre">Conheça o projeto</a>
@@ -64,41 +65,34 @@
     <div class="ep-grade">
       <div class="ep-info">
         <p class="rotulo rotulo-cian">Episódio</p>
-        <h2 id="ep-titulo">Título do episódio</h2>
-        <p>Aqui vai a descrição do episódio. Um breve resumo sobre o que foi abordado na conversa, como os temas principais e o que você vai encontrar neste conteúdo.</p>
+        <h2 id="ep-titulo">
+A IA está te deixando burro?</h2>
+        <p>Ou você é que está deixando ela pensar no seu lugar? </p>
+        <p> Projeto de Extensão Eco Digital · Sistemas de Informação · UNEX, Vitória da Conquista.</p>
 
-        <div class="ep-midia">
-          <div class="capa"><img src="imagens/capa-episodio.jpg" alt="Capa do episódio do UNEXCast" data-oculta-se-falhar></div>
-          <div class="audio-bloco">
-            <label for="audio" class="so-leitor">Player de áudio do episódio</label>
-            <audio id="audio" controls preload="metadata" src="midia/episodio.mp3"></audio>
-            <p class="aviso" id="avisoAudio" hidden>Arquivo de áudio não encontrado. Coloque o arquivo em <code>midia/episodio.mp3</code>.</p>
-          </div>
-        </div>
 
-        <div class="abas" role="tablist" aria-label="Transcrição e legendas">
-          <button role="tab" id="tab-transc" aria-selected="true" aria-controls="painel-transc">Transcrição</button>
-          <button role="tab" id="tab-leg" aria-selected="false" aria-controls="painel-leg" tabindex="-1">Legendas</button>
-        </div>
-        <div class="painel" role="tabpanel" id="painel-transc" aria-labelledby="tab-transc">
-          <ol class="transcricao" id="transcricao"></ol>
-        </div>
-        <div class="painel" role="tabpanel" id="painel-leg" aria-labelledby="tab-leg" hidden>
-          <p>As legendas ficam no arquivo <code>midia/legendas-pt.vtt</code> e aparecem sobre o vídeo.</p>
-          <button class="btn btn-borda" id="btnLegendas" aria-pressed="false">Ativar legendas no vídeo</button>
-        </div>
+        <div class="abas" role="tablist">
+    <button class="aba ativa" role="tab" aria-selected="true">
+        Momentos do episódio
+    </button>
+</div>
+
+<div class="painel momentos-painel">
+    <ol id="listaMomentos" class="lista-momentos"></ol>
+</div>
       </div>
 
       <div class="ep-video">
         <div class="video-caixa">
-          <video id="video" preload="metadata" poster="imagens/miniatura-video.jpg" aria-label="Vídeo do episódio">
-            <source src="midia/episodio.mp4" type="video/mp4">
-            <track id="trilha" kind="captions" src="midia/legendas-pt.vtt" srclang="pt-BR" label="Português">
-          </video>
-          <button class="video-play" id="videoPlay" aria-label="Reproduzir vídeo"><svg aria-hidden="true"><use href="#i-play"/></svg></button>
-        </div>
-        <p class="aviso" id="avisoVideo" hidden>Arquivo de vídeo não encontrado. Coloque o arquivo em <code>midia/episodio.mp4</code>.</p>
-        <button class="btn btn-borda btn-peq" id="btnCompleta" aria-expanded="false" aria-controls="transcricao">Ver transcrição completa</button>
+    <iframe
+    id="youtubePlayer"
+    src="https://www.youtube.com/embed/qEphT_UxmKo?enablejsapi=1"
+    title="UNEXCast - A IA está te deixando burro?"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen>
+</iframe>
+</div>
+    
       </div>
     </div>
   </section>
@@ -110,7 +104,7 @@
       <div>
         <p class="rotulo rotulo-cian">Sobre o UNEXCast</p>
         <h2 id="sobre-titulo">Mais que um podcast, um espaço de ideias.</h2>
-        <p>O UNEXCast é um projeto acadêmico que nasce da vontade de ouvir, aprender e compartilhar. Nosso objetivo é reunir pessoas com diferentes perspectivas para conversar sobre temas atuais e relevantes, abordando assuntos que vão além da sala de aula.</p>
+        <p>O UnexCast é o podcast do projeto de extensão Eco Digital, do curso de Sistemas de Informação da UNEX. Neste episódio, Lucas, Luiz Carlos, Lázaro e Luan conversam sobre como a inteligência artificial, as redes sociais e o streaming estão mudando a nossa cultura, o jeito de estudar e o mercado de trabalho. De um lado, o olhar do jornalismo sobre cultura e educação. Do outro, a visão de quem vive tecnologia, startup e marketing. Não é uma entrevista: é uma conversa em que todo mundo fala.</p>
         <div id="sobreMais" hidden>
           <p>O projeto promove reflexão, aprendizagem e troca de conhecimentos em formato de conversa. <em>(Texto provisório — substitua pela descrição oficial do projeto.)</em></p>
         </div>
@@ -138,8 +132,8 @@
     <svg class="logo-icone" aria-hidden="true"><use href="#i-mic"/></svg><span>UNEX<b>Cast</b></span>
   </a>
   <nav aria-label="Rodapé">
-    <a href="#inicio">Início</a><a href="#episodio">Episódio</a><a href="#sobre">Sobre</a><a href="#participantes">Participantes</a>
-  </nav>
+  <a href="#inicio">Início</a><a href="#episodio">Episódio</a><a href="#sobre">Sobre</a><a href="#participantes">Participantes</a><a href="#desenvolvedores">Desenvolvedores</a>
+</nav>
   <p>© <span id="ano">2026</span> UNEXCast. Todos os direitos reservados.</p>
   <p>Desenvolvido por: Equipe UNEXCast</p>
 </footer>
