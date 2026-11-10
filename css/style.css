@@ -1,5 +1,5 @@
 :root{
-  --bg:#040b1a; --bg2:#071329; --cartao:#0a1a36; --borda:#16315c;
+  --bg:#040b1a; --bg2:#071329; --cartao:#0a1a36; --borda:hsl(217, 61%, 22%);
   --verde:#a6e22e; --cian:#38b6ff; --texto:#eef3ff; --muda:#aebbd6;
   --raio:14px;
 }
@@ -277,7 +277,7 @@ ul{list-style:none;padding:0}
     margin-bottom: 8px;
     font-size: 1.05rem;
     font-weight: 500;
-    color: #d6e6ff;
+    color: #a6e22e;
     line-height: 1.3;
 }
 
@@ -286,3 +286,274 @@ ul{list-style:none;padding:0}
 .abas { margin-top: 20px; }
 .momentos-painel { flex: 1; min-height: 140px; position: relative; overflow: hidden; padding: 0; }
 @media (max-width: 1000px) { .momentos-painel { min-height: 320px; } }
+
+/* Sobre: "O que a gente prioriza" e "Assuntos do episódio" */
+.pilares,.assuntos{list-style:none;padding:0;display:grid;gap:12px}
+.pilares{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-bottom:10px}
+.pilares li{background:#071a38;border:1px solid var(--borda);border-radius:10px;padding:16px;transition:transform .2s,border-color .2s}
+.pilares li:hover{transform:translateY(-3px);border-color:var(--cian)}
+.pilares svg{width:26px;height:26px;fill:none;stroke:var(--cian);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;margin-bottom:10px}
+.pilares h4{font-size:1.05rem;margin-bottom:4px}
+.pilares p{font-size:.9rem;color:var(--muda)}
+.assuntos{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.assuntos li{border-left:3px solid var(--cian);padding:2px 0 2px 12px}
+.assuntos strong{display:block;font-weight:500}
+.assuntos span{display:block;font-size:.88rem;color:var(--muda)}
+
+.duas-colunas { grid-template-columns: 1fr; }
+
+/* Sobre: versão compacta */
+.sobre-resumo{font-size:.95rem}
+.tags{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.tags li{font-size:.8rem;color:var(--cian);border:1px solid var(--borda);background:#071a38;border-radius:999px;padding:3px 12px}
+
+/* Janela "Saiba mais sobre o projeto" */
+.modal{width:min(920px,92vw);max-height:88vh;padding:0;margin:auto;border:1px solid var(--cian);border-radius:var(--raio);
+  background:linear-gradient(160deg,var(--cartao),var(--bg2));color:var(--texto);box-shadow:0 24px 70px rgba(0,0,0,.6)}
+.modal[open]{display:flex;flex-direction:column}
+.modal::backdrop{background:rgba(2,6,16,.78);backdrop-filter:blur(4px)}
+body:has(.modal[open]){overflow:hidden}
+.modal-topo{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:22px clamp(18px,3vw,32px) 16px;border-bottom:1px solid var(--borda)}
+.modal-topo h2{font-size:1.6rem}
+.modal-sub{color:var(--muda);font-size:.9rem}
+.modal-x{flex:none;width:42px;height:42px;display:grid;place-items:center;background:#0b2247;border:1px solid var(--borda);border-radius:50%;transition:border-color .2s,background .2s}
+.modal-x:hover{border-color:var(--cian);background:rgba(56,182,255,.14)}
+.modal-x svg{width:20px;height:20px;fill:none;stroke:var(--texto);stroke-width:2;stroke-linecap:round}
+.modal-corpo{overflow-y:auto;padding:22px clamp(18px,3vw,32px) 28px;display:grid;gap:14px;scrollbar-width:thin;scrollbar-color:var(--cian) transparent}
+.modal-corpo>p{color:var(--muda)}
+.modal-corpo h3{margin:10px 0 0}
+.quem{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.quem li{background:#071a38;border:1px solid var(--borda);border-radius:10px;padding:14px 16px}
+.quem strong{display:block;margin-bottom:4px}
+.quem span{font-size:.9rem;color:var(--muda)}
+
+/* Cores do projeto no card Sobre e na janela */
+.rotulo b,.modal-topo h2 b{color:var(--verde)}
+.assuntos li{border-left-color:var(--verde)}
+.pilares li:hover,.quem li:hover{border-color:var(--verde)}
+.tags li{border-color:rgba(166,226,46,.45)}
+
+
+
+
+
+
+
+
+
+/* Modo "assistindo" (celular): vídeo fixo no topo e momentos embaixo, estilo YouTube */
+.ep-alca{display:none}
+@media (max-width:760px){
+  body.assistindo{overflow:hidden}
+  body.assistindo .ep-grade{position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;gap:0;
+    padding-top:env(safe-area-inset-top,0px);background:var(--bg);transition:transform .22s ease}
+  body.assistindo .ep-grade.arrastando{transition:none}
+  body.assistindo .ep-video{order:-1;flex:none}
+  body.assistindo .video-caixa{border-radius:0;border-left:0;border-right:0}
+  body.assistindo .ep-alca{display:flex;align-items:center;justify-content:center;position:relative;height:38px;
+    background:var(--bg);touch-action:none;cursor:grab}
+  .ep-grip{width:44px;height:5px;border-radius:3px;background:var(--borda)}
+  .ep-min{position:absolute;left:6px;top:0;width:44px;height:38px;display:grid;place-items:center;background:none;border:0}
+  .ep-min svg{width:22px;height:22px;fill:none;stroke:var(--texto);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+  body.assistindo .ep-info{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:12px 14px 28px}
+  body.assistindo .momentos-painel{flex:none;height:auto;overflow:visible}
+  body.assistindo .lista-momentos{position:static}
+}
+
+
+/* Celular: tudo menor + vídeo em cima, momentos embaixo (estilo YouTube) */
+@media (max-width:760px){
+  html{font-size:14px}                       /* reduz todos os textos em rem (~12%) */
+  main>.secao,.duas-colunas{margin:12px 10px}
+  .cartao{padding:14px}
+  h2{font-size:1.25rem;margin-bottom:6px}
+  .cartao>p{font-size:.9rem}
+  .rotulo{font-size:.72rem;letter-spacing:.16em;margin-bottom:4px}
+
+  /* cabeçalho e menu */
+  .topo{padding:8px 14px}
+  .logo{font-size:1.3rem}
+  .logo-icone{width:28px;height:28px}
+  .menu-btn{width:40px;height:40px;padding:9px;gap:4px}
+  .menu a{padding:12px 4px;font-size:.95rem}
+
+  /* início */
+  .hero-img{height:170px}
+  .hero-texto{padding:16px 16px 26px;margin-top:-36px}
+  .marca{font-size:2.3rem;letter-spacing:-1px;margin-bottom:8px}
+  .destaque{font-size:1rem;margin-bottom:8px}
+  .hero-texto>p:not(.rotulo):not(.destaque){font-size:.9rem}
+  .botoes{margin:16px 0 14px;gap:10px}
+  .btn{padding:10px 18px;font-size:.9rem;min-height:42px}
+  .rolar{font-size:.85rem}
+
+  /* episódio: vídeo em cima */
+  #episodio{padding:10px}
+  .ep-grade{gap:12px}
+  .ep-video{order:-1}
+  .video-caixa{flex:none;border-radius:10px}
+  #ep-titulo{font-size:1.2rem;line-height:1.25;margin-bottom:4px}
+  .ep-info>p{font-size:.85rem;line-height:1.4;margin-bottom:4px}
+  #ep-titulo + p{font-size:.95rem;margin-bottom:4px}
+  .abas{margin-top:10px}
+  .abas button{padding:8px 14px;font-size:.9rem}
+  .momentos-painel{flex:none;height:260px;min-height:0}
+  .lista-momentos{padding:0 8px}
+  .momento-item{padding:9px 6px;gap:10px}
+  .momento-tempo{min-width:44px;font-size:.88rem}
+  .momento-titulo{font-size:.9rem;line-height:1.35}
+  .momento-item svg{width:14px;height:14px}
+
+  /* sobre */
+  .sobre{gap:12px}
+  .sobre-img{aspect-ratio:21/9}
+  .sobre-resumo{font-size:.9rem}
+  .tags{gap:6px;margin-top:8px}
+  .tags li{font-size:.75rem;padding:2px 10px}
+  .sobre .btn{margin-top:10px}
+
+  /* participantes */
+  .grade-part{gap:10px;margin-top:12px}
+  .foto{aspect-ratio:4/3}
+  .part-info{padding:8px 10px}
+  .part-info strong{font-size:.9rem;line-height:1.25}
+  .part-info span{font-size:.78rem;margin-bottom:6px}
+  .redes{gap:8px}
+  .redes a{width:30px;height:30px}
+  .redes svg{width:22px;height:22px}
+
+  /* desenvolvedores */
+  .grade-dev{gap:10px;margin-top:12px}
+  .dev{gap:12px;padding:12px}
+  .dev-foto{width:56px;height:56px}
+  .dev p{font-size:.82rem}
+
+  /* rodapé */
+  .rodape{padding-top:18px;padding-bottom:18px;gap:10px;font-size:.8rem}
+  .rodape .logo{font-size:1.15rem}
+  .rodape nav a{padding:6px 0}
+
+  /* janela "Saiba mais" */
+  .modal{width:94vw;max-height:90vh}
+  .modal-topo{padding:14px 14px 10px}
+  .modal-topo h2{font-size:1.3rem}
+  .modal-sub{font-size:.8rem}
+  .modal-x{width:36px;height:36px}
+  .modal-corpo{padding:14px;gap:10px;font-size:.9rem}
+  .pilares{gap:8px}
+  .pilares li{padding:12px}
+  .pilares svg{width:22px;height:22px;margin-bottom:6px}
+  .pilares h4{font-size:.95rem}
+  .pilares p,.assuntos span,.quem span{font-size:.8rem}
+  .quem li{padding:10px 12px}
+}
+
+
+/* Fotos sem cortar o rosto */
+.foto{aspect-ratio:3/4}
+.foto img{object-position:center top}
+
+/* "Mais informações": menor e com ícone + / − no lugar da seta */
+.part-detalhes summary{font-size:.78rem}
+.part-detalhes summary::after{
+  content:"+";
+  flex:none;width:14px;height:14px;display:grid;place-items:center;
+  border:1px solid var(--cian);border-radius:50%;
+  font-size:.95rem;font-weight:500;line-height:1;transition:background .2s,color .2s;
+}
+.part-detalhes summary:hover::after{background:rgba(56,182,255,.16)}
+.part-detalhes[open] summary::after{content:"\2212";transform:none}
+.part-detalhes p{font-size:.8rem}
+
+/* Desenvolvedores: texto ocupa o resto do card */
+.dev>div:last-child{flex:1;min-width:0}
+@media (max-width:760px){ .part-detalhes summary{font-size:.82rem} }
+
+/* Desktop: vídeo maior, ocupando o espaço ao lado das informações do episódio */
+@media (min-width:1001px){
+  .ep-grade{grid-template-columns:minmax(320px,.9fr) minmax(0,1.3fr);gap:32px}
+}
+
+/* Sobre: imagem maior e sem cortes */
+@media (min-width:761px){
+  .sobre{grid-template-columns:clamp(240px,30%,420px) 1fr;gap:32px;align-items:center}
+  .sobre-img{aspect-ratio:auto}
+  .sobre-img img{height:auto;object-fit:contain}
+}
+@media (max-width:760px){
+  .sobre-img{aspect-ratio:16/9}
+  .sobre-img img{height:100%;object-fit:cover}
+}
+
+
+
+
+
+/* Celular: a tela inicial funciona como uma "página" cheia */
+@keyframes dicaRolar{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+@media (max-width:760px){
+  .hero{min-height:calc(100svh - 57px);justify-content:flex-end}
+  .hero-img{flex:1;height:auto;min-height:150px}                /* a imagem preenche o espaço que sobra */
+  .hero-texto{padding-bottom:22px}
+  .rolar-seta{animation:dicaRolar 1.6s ease-in-out infinite}   /* dica para arrastar */
+}
+
+
+
+/* Celular: sobe o bloco de texto da tela inicial */
+@media (max-width:760px){
+  .hero-texto{padding-bottom:64px}
+}
+
+/* Celular: imagem sempre dentro da tela + degradê que desce até o texto */
+@media (max-width:760px){
+  .hero-img{
+    position:relative;overflow:hidden;min-height:150px;
+    -webkit-mask-image:linear-gradient(180deg,#000 45%,transparent 100%);
+            mask-image:linear-gradient(180deg,#000 45%,transparent 100%);
+  }
+  /* continuação do banner: a mesma imagem, desfocada, esticada atrás */
+  .hero-img::before{
+    content:"";position:absolute;inset:0;
+    background:url("../imagens/hero-estudio.jpg") center bottom/cover no-repeat;
+    filter:blur(22px);transform:scale(1.2);opacity:.55;
+  }
+  /* largura total; se a imagem for mais alta que o espaço, corta só a parte de baixo */
+  .hero-img img{
+    position:absolute;top:0;left:0;display:block;
+    width:100%;height:auto;max-height:100%;
+    object-fit:cover;object-position:center top;
+    -webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);
+            mask-image:linear-gradient(180deg,#000 62%,transparent 100%);
+  }
+}
+
+/* "Conheça o projeto": salto + neon na seção Sobre */
+@keyframes saltoSobre{
+  0%{transform:translateY(0) scale(1)}
+  22%{transform:translateY(-26px) scale(1.012)}
+  42%{transform:translateY(0) scale(1)}
+  58%{transform:translateY(-12px) scale(1.006)}
+  74%{transform:translateY(0) scale(1)}
+  86%{transform:translateY(-4px)}
+  100%{transform:translateY(0)}
+}
+@keyframes neonSobre{
+  0%{border-color:var(--borda);box-shadow:0 0 0 rgba(166,226,46,0)}
+  10%,26%,44%,60%{border-color:var(--verde);
+    box-shadow:0 0 6px rgba(166,226,46,.95),0 0 18px rgba(166,226,46,.7),0 0 44px rgba(56,182,255,.5),inset 0 0 18px rgba(166,226,46,.16)}
+  18%,34%{border-color:rgba(166,226,46,.45);
+    box-shadow:0 0 4px rgba(166,226,46,.4),0 0 12px rgba(166,226,46,.25)}   /* piscada de neon */
+  75%{border-color:var(--verde);
+    box-shadow:0 0 6px rgba(166,226,46,.9),0 0 18px rgba(166,226,46,.65),0 0 44px rgba(56,182,255,.45),inset 0 0 18px rgba(166,226,46,.14)}
+  100%{border-color:var(--borda);box-shadow:0 0 0 rgba(166,226,46,0)}
+}
+#sobre.destacar{
+  position:relative;z-index:2;
+  animation:saltoSobre .95s cubic-bezier(.28,.7,.35,1),neonSobre 3s ease-out;
+}
+
+/* Desktop: a tela inicial preenche toda a tela (menos o menu do topo) */
+@media (min-width:761px){
+  .hero{min-height:max(560px,calc(100svh - 69px))}
+}

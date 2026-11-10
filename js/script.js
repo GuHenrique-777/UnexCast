@@ -128,11 +128,18 @@ if (listaMomentos) {
 /* ============================================================
    Controle do vídeo do YouTube
    ============================================================ */
-
 let playerYoutube = null;
+let tocarAoPronto = false;
 
 window.onYouTubeIframeAPIReady = function () {
-    playerYoutube = new YT.Player('youtubePlayer');
+  playerYoutube = new YT.Player('youtubePlayer', {
+    events: {
+        // se o clique em "Assistir ao episódio" veio antes do player carregar, toca agora
+        onReady: () => { if (tocarAoPronto) { tocarAoPronto = false; playerYoutube.playVideo(); } },
+        // quando o vídeo começa a tocar, abre o modo "assistindo" no celular
+        onStateChange: (ev) => { if (ev.data === 1) abrirAssistir(); }
+    }
+});
 };
 
 const scriptYoutube = document.createElement('script');
@@ -184,8 +191,11 @@ $('#listaDevs').innerHTML = desenvolvedores.map((d) => `
     <div>
       <strong>${d.nome}</strong>
       <p class="funcao">${d.funcao}</p>
-      <p>${d.descricao}</p>
       <div class="redes">${criarRedes(d, 'desenvolvedor')}</div>
+      <details class="part-detalhes">
+        <summary>Mais informações</summary>
+        <p>${d.descricao}</p>
+      </details>
     </div>
   </li>`).join('');
 
@@ -268,3 +278,133 @@ document.addEventListener('click', function(event) {
         alert('Perfil do LinkedIn indisponível no momento.');
     }
 });
+
+/* Janela "Saiba mais sobre o projeto" */
+const modalSobre = $('#modalSobre');
+$('#btnSobre').addEventListener('click', () => modalSobre.showModal());
+modalSobre.addEventListener('click', (e) => {
+  // fecha no "x" ou ao clicar fora da janela
+  if (e.target === modalSobre || e.target.closest('[data-fechar]')) modalSobre.close();
+});
+
+
+
+
+/* ============================================================
+   Modo "assistindo" no celular (estilo YouTube)
+   ============================================================ */
+const mobileMQ = window.matchMedia('(max-width: 760px)');
+const secaoEp = $('#episodio');
+const gradeEp = secaoEp.querySelector('.ep-grade');
+const alcaEp = $('#epAlca');
+
+function abrirAssistir() {
+  if (!mobileMQ.matches || document.body.classList.contains('assistindo')) return;
+  secaoEp.style.minHeight = secaoEp.offsetHeight + 'px'; // segura o espaço do card na página
+  document.body.classList.add('assistindo');
+  secaoEp.querySelector('.ep-info').scrollTop = 0;
+}
+
+function fecharAssistir(imediato) {
+  if (!document.body.classList.contains('assistindo')) return;
+  const terminar = () => {
+    document.body.classList.remove('assistindo');
+    gradeEp.style.transform = '';
+    secaoEp.style.minHeight = '';
+  };
+  if (imediato) { terminar(); return; }
+  gradeEp.style.transform = 'translateY(100%)';
+  setTimeout(terminar, 220);
+}
+
+/* Botão "Assistir ao episódio" do topo: leva ao episódio e começa o vídeo */
+const btnAssistir = document.querySelector('.hero .btn-verde[href="#episodio"]');
+if (btnAssistir) {
+  btnAssistir.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (mobileMQ.matches) {
+      secaoEp.scrollIntoView({ behavior: 'instant', block: 'start' });
+      abrirAssistir();                                   // celular: modo "assistindo"
+    } else {
+      secaoEp.scrollIntoView({ behavior: 'smooth', block: 'start' }); // desktop: ajusta na aba Episódio
+    }
+    if (playerYoutube && typeof playerYoutube.playVideo === 'function') playerYoutube.playVideo();
+    else tocarAoPronto = true;
+  });
+}
+
+/* Puxar a barrinha para baixo (ou tocar na seta) minimiza e volta ao site */
+let arrasteY0 = null;
+let arrasteDY = 0;
+alcaEp.addEventListener('pointerdown', (e) => {
+  arrasteY0 = e.clientY;
+  arrasteDY = 0;
+  alcaEp.setPointerCapture(e.pointerId);
+  gradeEp.classList.add('arrastando');
+});
+alcaEp.addEventListener('pointermove', (e) => {
+  if (arrasteY0 === null) return;
+  arrasteDY = Math.max(0, e.clientY - arrasteY0);
+  gradeEp.style.transform = `translateY(${arrasteDY}px)`;
+});
+function soltarArraste() {
+  if (arrasteY0 === null) return;
+  arrasteY0 = null;
+  gradeEp.classList.remove('arrastando');
+  if (arrasteDY > 110) fecharAssistir(); else gradeEp.style.transform = '';
+}
+alcaEp.addEventListener('pointerup', soltarArraste);
+alcaEp.addEventListener('pointercancel', soltarArraste);
+$('#epMin').addEventListener('click', () => fecharAssistir());
+
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') fecharAssistir(); });
+mobileMQ.addEventListener('change', () => { if (!mobileMQ.matches) fecharAssistir(true); });
+
+
+/* Celular: a tela inicial funciona como uma "página".
+   Ao arrastar para baixo, ela se solta e encaixa no episódio; ao voltar, encaixa no topo. */
+let ultimoY = window.scrollY;
+let descendo = true;
+let timerEncaixe;
+
+window.addEventListener('scroll', () => {
+  if (!mobileMQ.matches || document.body.classList.contains('assistindo')) return;
+  const y = window.scrollY;
+  if (y !== ultimoY) descendo = y > ultimoY;
+  ultimoY = y;
+  clearTimeout(timerEncaixe);
+  timerEncaixe = setTimeout(() => {
+    const atual = window.scrollY;
+    const alvo = secaoEp.getBoundingClientRect().top + atual - 64; // início do episódio
+    if (atual > 8 && atual < alvo - 8) {
+      window.scrollTo({ top: descendo ? alvo : 0, behavior: 'smooth' });
+    }
+  }, 120);
+}, { passive: true });
+
+/* "Conheça o projeto": desce até o Sobre e a seção dá um salto com neon */
+const secaoSobre = $('#sobre');
+const btnConheca = document.querySelector('.hero .btn-borda[href="#sobre"]');
+
+function aoTerminarRolagem(callback) {
+  let t;
+  const checar = () => {
+    clearTimeout(t);
+    t = setTimeout(() => { window.removeEventListener('scroll', checar); callback(); }, 140);
+  };
+  window.addEventListener('scroll', checar, { passive: true });
+  checar();
+}
+
+if (btnConheca) {
+  btnConheca.addEventListener('click', (e) => {
+    e.preventDefault();
+    secaoSobre.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    aoTerminarRolagem(() => {
+      secaoSobre.classList.remove('destacar');
+      void secaoSobre.offsetWidth;                       // reinicia a animação se clicar de novo
+      secaoSobre.classList.add('destacar');
+      setTimeout(() => secaoSobre.classList.remove('destacar'), 3200);
+    });
+  });
+}

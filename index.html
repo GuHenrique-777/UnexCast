@@ -51,7 +51,7 @@
       <p class="rotulo">Podcast universitário</p>
       <h1 id="hero-titulo" class="marca">UNEX<b>Cast</b></h1>
       <p class="destaque">Ideias que conectam pessoas, conhecimento que transforma.</p>
-      <p>O UNEXCast é um projeto acadêmico que reúne conversas e reflexões sobre o mundo atual, com episódios, participantes e debates enriquecedores.</p>
+      <p>Projeto de Extensão Eco Digital · Sistemas de Informação · UNEX, Vitória da Conquista.</p>
       <div class="botoes">
         <a class="btn btn-verde" href="#episodio"><svg aria-hidden="true"><use href="#i-play"/></svg> Assistir ao episódio</a>
         <a class="btn btn-borda" href="#sobre">Conheça o projeto</a>
@@ -68,7 +68,7 @@
         <h2 id="ep-titulo">
 A IA está te deixando burro?</h2>
         <p>Ou você é que está deixando ela pensar no seu lugar? </p>
-        <p> Projeto de Extensão Eco Digital · Sistemas de Informação · UNEX, Vitória da Conquista.</p>
+        <p> Eco digital: O impacto da IA, redes sociais e streaming na cultura e na sociedade.</p>
 
 
         <div class="abas" role="tablist">
@@ -83,6 +83,17 @@ A IA está te deixando burro?</h2>
       </div>
 
       <div class="ep-video">
+
+ <!-- SOBRE + PARTICIPANTES -->
+
+ <div class="ep-alca" id="epAlca">
+  <button type="button" class="ep-min" id="epMin" aria-label="Minimizar vídeo">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+  </button>
+  <span class="ep-grip" aria-hidden="true"></span>
+</div>
+
+
         <div class="video-caixa">
     <iframe
     id="youtubePlayer"
@@ -99,18 +110,24 @@ A IA está te deixando burro?</h2>
 
   <!-- SOBRE + PARTICIPANTES -->
   <div class="duas-colunas">
-    <section class="secao cartao sobre" id="sobre" aria-labelledby="sobre-titulo">
-      <div class="sobre-img"><img src="imagens/sobre-estudio.jpg" alt="Estúdio de podcast com microfone, fones e plantas" data-oculta-se-falhar></div>
-      <div>
-        <p class="rotulo rotulo-cian">Sobre o UNEXCast</p>
-        <h2 id="sobre-titulo">Mais que um podcast, um espaço de ideias.</h2>
-        <p>O UnexCast é o podcast do projeto de extensão Eco Digital, do curso de Sistemas de Informação da UNEX. Neste episódio, Lucas, Luiz Carlos, Lázaro e Luan conversam sobre como a inteligência artificial, as redes sociais e o streaming estão mudando a nossa cultura, o jeito de estudar e o mercado de trabalho. De um lado, o olhar do jornalismo sobre cultura e educação. Do outro, a visão de quem vive tecnologia, startup e marketing. Não é uma entrevista: é uma conversa em que todo mundo fala.</p>
+     
+<section class="secao cartao sobre" id="sobre" aria-labelledby="sobre-titulo">
+  <div class="sobre-img"><img src="imagens/sobre-estudio.jpg" alt="Estúdio de podcast com microfone, fones e plantas" data-oculta-se-falhar></div>
+  <div>
+    <p class="rotulo rotulo-cian">Sobre o UNEXCast</p>
+    <h2 id="sobre-titulo">Mais que um podcast, um espaço de ideias.</h2>
+    <p class="sobre-resumo">Podcast do projeto de extensão Eco Digital, do curso de Sistemas de Informação da UNEX. Não é uma entrevista: é uma conversa em que todo mundo fala.</p>
+    <ul class="tags">
+        <!-- adicionar tag -->
+    </ul>
+    <button class="btn btn-borda btn-peq" id="btnSobre" aria-haspopup="dialog">Saiba mais sobre o projeto</button>
+  </div>
+</section>
+    
         <div id="sobreMais" hidden>
           <p>O projeto promove reflexão, aprendizagem e troca de conhecimentos em formato de conversa. <em>(Texto provisório — substitua pela descrição oficial do projeto.)</em></p>
         </div>
-        <button class="btn btn-borda btn-peq" id="btnSobre" aria-expanded="false" aria-controls="sobreMais">Saiba mais sobre o projeto</button>
-      </div>
-    </section>
+        <!-- O que a gente prioriza + Assuntos do episódio -->
 
     <section class="secao cartao" id="participantes" aria-labelledby="part-titulo">
       <h2 id="part-titulo" class="rotulo rotulo-cian titulo-rotulo">Participantes</h2>
@@ -137,6 +154,60 @@ A IA está te deixando burro?</h2>
   <p>© <span id="ano">2026</span> UNEXCast. Todos os direitos reservados.</p>
   <p>Desenvolvido por: Equipe UNEXCast</p>
 </footer>
+
+<!-- JANELA: Saiba mais sobre o projeto -->
+<dialog class="modal" id="modalSobre" aria-labelledby="modal-titulo">
+  <header class="modal-topo">
+    <div>
+      <p class="rotulo rotulo-cian">Sobre o projeto</p>
+      <h2 id="modal-titulo">UNEX<b>Cast</b></h2>
+      <p class="modal-sub">Projeto de Extensão Eco Digital · Sistemas de Informação · UNEX, Vitória da Conquista</p>
+    </div>
+    <button class="modal-x" type="button" data-fechar aria-label="Fechar">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </header>
+
+  <div class="modal-corpo">
+    <p>O UnexCast é o podcast do projeto de extensão Eco Digital, do curso de Sistemas de Informação da UNEX. Neste episódio, Lucas, Luiz Carlos, Lázaro e Luan conversam sobre como a inteligência artificial, as redes sociais e o streaming estão mudando a nossa cultura, o jeito de estudar e o mercado de trabalho. De um lado, o olhar do jornalismo sobre cultura e educação. Do outro, a visão de quem vive tecnologia, startup e marketing. Não é uma entrevista: é uma conversa em que todo mundo fala.</p>
+
+   <h3 class="rotulo">O que a gente prioriza</h3>
+    <ul class="pilares">
+      <li>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        <h4>Cultura</h4>
+        <p>Como a IA, as redes e o streaming mudam a arte, a música e o espaço da cultura local.</p>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>
+        <h4>Educação</h4>
+        <p>Como a IA e a internet mudam o jeito de estudar: onde ajudam, onde atrapalham e qual é o limite.</p>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+        <h4>Mercado de trabalho</h4>
+        <p>Novas profissões, empreendedorismo e o que a IA faz, e o que ainda depende de gente.</p>
+      </li>
+    </ul>
+
+   <h3 class="rotulo">Assuntos do episódio</h3>
+    <ul class="assuntos">
+      <li><strong>IA na cultura e na arte</strong><span>música, imagens e vozes criadas por máquina</span></li>
+      <li><strong>IA e internet nos estudos</strong><span>ajuda ou cola? O que muda na escola e na faculdade</span></li>
+      <li><strong>Redes sociais e cultura</strong><span>trends, bolhas, saúde mental e fake news</span></li>
+      <li><strong>Streaming e diversidade cultural</strong><span>o algoritmo escolhe por nós? E a cultura daqui?</span></li>
+      <li><strong>Mercado de trabalho e empreendedorismo</strong><span>startups, marketing e novas profissões</span></li>
+    </ul>
+
+    <h3 class="rotulo">Quem participa</h3>
+    <ul class="quem">
+      <li><strong>Lucas Santos Sousa</strong><span>Estudante de Sistemas de Informação na UNEX e fundador do Atrix, startup de tecnologia: um app de produtividade gamificada criado com inteligência artificial.</span></li>
+      <li><strong>Luiz Carlos Bizerra Fernandes</strong><span>Estudante de Sistemas de Informação na UNEX. Trabalha com marketing.</span></li>
+      <li><strong>Lázaro</strong><span>Estudante de Jornalismo. Foi bolsista do site Avoador, da UESB, por dois anos e hoje está no Mais Esporte, que transmite o futebol amador de Vitória da Conquista. Faz reportagens com artistas locais e já cobriu o FIB e o JUC.</span></li>
+      <li><strong>Luan</strong><span>Estudante de Jornalismo e bolsista há dois anos do site Avoador, da UESB. Também está no Mais Esporte e já cobriu o FIB, o JUC e a Anicon. Disputou, com Lázaro, o Prêmio Abapa de Jornalismo.</span></li>
+    </ul>
+  </div>
+</dialog>
 
 <script src="js/script.js"></script>
 </body>
